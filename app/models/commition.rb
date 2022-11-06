@@ -1,0 +1,2 @@
+class Commition < ApplicationRecord
+end
