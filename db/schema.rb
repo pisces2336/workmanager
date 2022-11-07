@@ -15,6 +15,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_06_103139) do
   enable_extension "plpgsql"
 
   create_table "commitions", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.string "twitter_id"
+    t.boolean "early_submit"
+    t.boolean "use_sample"
+    t.string "payment_method"
+    t.integer "price"
+    t.boolean "paid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -32,6 +40,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_06_103139) do
   end
 
   create_table "works", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "commition_id"
+    t.string "type"
+    t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
