@@ -1,0 +1,65 @@
+<%= form_with model: model do |f| %>
+  <table class="w-100 table">
+    <tbody>
+      <% if model.errors.any? %>
+        <tr>
+          <td colspan="3">
+            <%= render "layouts/errors", model: model %>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td><%= f.label :name, "依頼者名" %></td>
+        <td colspan="2"><%= f.text_field :name %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :twitter, "Twitter" %></td>
+        <td colspan="2"><%= f.text_field :twitter %></td>
+      </tr>
+      <tr>
+        <td class="w-50"><%= f.label :early_submit, "早期納品" %></td>
+        <td class="w-25">
+          <%= f.radio_button :early_submit, true %>
+          <%= f.label :early_submit_true, "あり" %>
+        </td>
+        <td class="w-25">
+          <%= f.radio_button :early_submit, false, checked: true %>
+          <%= f.label :early_submit_false, "なし" %>
+        </td>
+      </tr>
+      <tr>
+        <td><%= f.label :use_sample, "サンプル使用" %></td>
+        <td>
+          <%= f.radio_button :use_sample, true, checked: true %>
+          <%= f.label :use_sample_true, "可能" %>
+        </td>
+        <td>
+          <%= f.radio_button :use_sample, false %>
+          <%= f.label :use_sample_false, "不可" %>
+        </td>
+      </tr>
+      <tr>
+        <td><%= f.label :payment_method, "お支払方法" %></td>
+        <td colspan="2"><%= f.text_field :payment_method %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :price, "お見積金額" %></td>
+        <td colspan="2"><%= f.number_field :price %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :use_sample, "入金確認" %></td>
+        <td>
+          <%= f.radio_button :paid, true %>
+          <%= f.label :paid_true, "確認済" %>
+        </td>
+        <td>
+          <%= f.radio_button :paid, false, checked: true %>
+          <%= f.label :paid_false, "未確認" %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-grid">
+    <%= f.submit "送信", class: "btn btn-success" %>
+  </div>
+<% end %>

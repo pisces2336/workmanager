@@ -1,5 +1,6 @@
 class CommitionsController < ApplicationController
   def index
+    @commitions = Commition.all
   end
 
   def new
@@ -12,7 +13,7 @@ class CommitionsController < ApplicationController
     if @commition.save
       redirect_to commition_path(@commition)
     else
-      render "new"
+      render :new
     end
   end
 
