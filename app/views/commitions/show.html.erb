@@ -4,7 +4,7 @@
       <h2>依頼詳細</h2>
       <div>
         <%= link_to "編集", edit_commition_path(@commition), class: "btn btn-success"%>
-        <%= link_to "削除", commition_path(@commition), method: :destroy, class: "btn btn-danger"%>
+        <%= link_to "削除", commition_path(@commition), method: :delete, data: {confirm: "本当に削除しますか?"}, class: "btn btn-danger"%>
       </div>
     </div>
     <table class="table align-middle mt-1">

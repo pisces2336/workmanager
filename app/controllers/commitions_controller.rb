@@ -22,6 +22,25 @@ class CommitionsController < ApplicationController
     end
   end
 
+  def edit
+    @commition = Commition.find(params[:id])
+  end
+
+  def update
+    @commition = Commition.find(params[:id])
+    if @commition.update(commition_params)
+      redirect_to commition_path(@commition)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    commition = Commition.find(params[:id])
+    commition.destroy
+    redirect_to user_path
+  end
+
   private
   def commition_params
     params.require(:commition).permit(
