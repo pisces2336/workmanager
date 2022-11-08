@@ -4,7 +4,7 @@ class CreateCommitions < ActiveRecord::Migration[7.0]
       t.integer :user_id
 
       t.string :name
-      t.string :twitter_id
+      t.string :twitter
       t.boolean :early_submit
       t.boolean :use_sample
       t.string :payment_method
