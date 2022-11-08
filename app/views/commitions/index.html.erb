@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="mx-auto col-11 col-lg-8">
+    <h2>依頼者一覧</h2>
+    <table class="table align-middle">
+      <thead>
+        <tr>
+          <th>名前</th>
+          <th>Twitter</th>
+          <th class="w-25"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @commitions.each do |commition| %>
+          <tr>
+            <td><%= commition.name %></td>
+            <td><%= commition.twitter %></td>
+            <td><%= link_to "詳細", commition_path(commition), class: "btn btn-success" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

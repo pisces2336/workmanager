@@ -1,13 +1,9 @@
 <%= form_with model: model do |f| %>
-  <table class="w-100 table">
+  <table class="w-100 table align-middle">
+    <% if model.errors.any? %>
+      <%= render "layouts/errors", model: model %>
+    <% end %>
     <tbody>
-      <% if model.errors.any? %>
-        <tr>
-          <td colspan="3">
-            <%= render "layouts/errors", model: model %>
-          </td>
-        </tr>
-      <% end %>
       <tr>
         <td><%= f.label :name, "依頼者名" %></td>
         <td colspan="2"><%= f.text_field :name %></td>
