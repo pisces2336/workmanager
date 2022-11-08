@@ -42,7 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_06_103139) do
   create_table "works", force: :cascade do |t|
     t.integer "user_id"
     t.integer "commition_id"
-    t.string "type"
+    t.string "title"
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

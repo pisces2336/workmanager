@@ -4,7 +4,7 @@ class CreateWorks < ActiveRecord::Migration[7.0]
       t.integer :user_id
       t.integer :commition_id
 
-      t.string :type
+      t.string :title
       t.date :date
 
       t.timestamps

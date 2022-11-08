@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="mx-auto col-11 col-lg-8">
+    <div class="d-flex justify-content-between align-middle">
+      <h2>依頼詳細</h2>
+      <div>
+        <%= link_to "編集", edit_commition_path(@commition), class: "btn btn-success"%>
+        <%= link_to "削除", commition_path(@commition), method: :destroy, class: "btn btn-danger"%>
+      </div>
+    </div>
+    <table class="table align-middle mt-1">
+      <tr>
+        <td>依頼者名</td>
+        <td><%= @commition.name %></td>
+      </tr>
+      <tr>
+        <td>Twitter</td>
+        <td><%= @commition.twitter %></td>
+      </tr>
+      <tr>
+        <td>早期納品</td>
+        <td>
+          <% if @commition.early_submit %>
+            あり
+          <% else %>
+            なし
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>サンプル使用</td>
+        <td>
+          <% if @commition.use_sample %>
+            可能
+          <% else %>
+            不可
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>お支払方法</td>
+        <td>
+          <% if @commition.payment_method.blank? %>
+            未設定
+          <% else %>
+            <%= @commition.payment_method %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>お見積り金額</td>
+        <td>
+          <% if @commition.price.blank? %>
+            未設定
+          <% else %>
+            <%= @commition.price %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>入金確認</td>
+        <td>
+          <% if @commition.paid %>
+            確認済み
+          <% else %>
+            未確認
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="mt-3 row">
+  <div class="mx-auto col-11 col-lg-8">
+    <div class="d-flex justify-content-between align-middle">
+      <h3>作業スケジュール</h3>
+      <div>
+        <%= link_to "新規作成", new_work_path, class: "btn btn-success"%>
+      </div>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>作業</th>
+          <th>提出日</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @commition.works.each do |work| %>
+          <tr>
+            <td><%= work.type %></td>
+            <td><%= work.date %></td>
+            <td>
+              <%= link_to "編集", edit_work_path(work), class: "btn btn-success"%>
+              <%= link_to "削除", work_path(work), method: :destroy, class: "btn btn-danger"%>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

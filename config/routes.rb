@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   # root "articles#index"
   root to: "homes#top"
   get "/user", to: "users#show", as: "user"
-  resources :commitions do
-    resources :works
-  end
+  resources :commitions
+  resources :works
 end

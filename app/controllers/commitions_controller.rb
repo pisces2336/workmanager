@@ -3,6 +3,10 @@ class CommitionsController < ApplicationController
     @commitions = Commition.all
   end
 
+  def show
+    @commition = Commition.find(params[:id])
+  end
+
   def new
     @commition = Commition.new
   end
