@@ -77,7 +77,7 @@
     <div class="d-flex justify-content-between align-middle">
       <h3>作業スケジュール</h3>
       <div>
-        <%= link_to "新規作成", new_work_path, class: "btn btn-success"%>
+        <%= link_to "新規作成", new_commition_work_path(@commition), class: "btn btn-success"%>
       </div>
     </div>
 
@@ -92,11 +92,11 @@
       <tbody>
         <% @commition.works.each do |work| %>
           <tr>
-            <td><%= work.type %></td>
+            <td><%= work.title %></td>
             <td><%= work.date %></td>
             <td>
-              <%= link_to "編集", edit_work_path(work), class: "btn btn-success"%>
-              <%= link_to "削除", work_path(work), method: :destroy, class: "btn btn-danger"%>
+              <%= link_to "編集", edit_commition_work_path(@commition, work), class: "btn btn-success"%>
+              <%= link_to "削除", commition_work_path(@commition, work), method: :destroy, class: "btn btn-danger"%>
             </td>
           </tr>
         <% end %>

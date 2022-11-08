@@ -14,7 +14,7 @@
         <% @works.each do |work| %>
           <tr>
             <td><%= work.commition.name %></td>
-            <td><%= work.type %></td>
+            <td><%= work.title %></td>
             <td><%= link_to "詳細", commition_path(work.commition), class: "btn btn-success" %></td>
           </tr>
         <% end %>
