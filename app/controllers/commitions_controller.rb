@@ -5,6 +5,7 @@ class CommitionsController < ApplicationController
 
   def show
     @commition = Commition.find(params[:id])
+    @works = Work.where(commition: @commition).order("date")
   end
 
   def new
