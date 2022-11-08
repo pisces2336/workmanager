@@ -5,13 +5,19 @@
     <table class="table">
       <thead>
         <tr>
-          <th>依頼者名</th>
-          <th>作業内容</th>
-          <th></th>
+          <th class="w-50">依頼者名</th>
+          <th class="w-25">作業内容</th>
+          <th class="w-25"></th>
         </tr>
       </thead>
       <tbody>
-        <% %>
+        <% @works.each do |work| %>
+          <tr>
+            <td><%= work.commition.name %></td>
+            <td><%= work.type %></td>
+            <td><%= link_to "詳細", commition_path(work.commition), class: "btn btn-success" %></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>
