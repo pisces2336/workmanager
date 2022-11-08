@@ -16,6 +16,27 @@ class WorksController < ApplicationController
     end
   end
 
+  def edit
+    @work = Work.find(params[:id])
+    @commition = @work.commition
+  end
+
+  def update
+    @work = Work.find(params[:id])
+    if @work.update(work_params)
+      redirect_to commition_path(params[:commition_id])
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    work = Work.find(params[:id])
+    commition = work.commition
+    work.destroy
+    redirect_to commition_path(commition)
+  end
+
   private
   def work_params
     params.require(:work).permit(:title, :date, :commition_id)

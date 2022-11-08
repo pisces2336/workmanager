@@ -10,21 +10,13 @@
 <div class="mt-3 row">
   <div class="mx-auto col">
     <h3>本日(<%= Date.today.strftime("%m/%d")%>)の作業</h3>
-    <% if @works_today.blank? %>
-      <p>今日やるべき作業はありません。</p>
-    <% else %>
-      <%= render "works/list", works: @works_today %>
-    <% end %>
+    <%= render "works/list", works: @works_today %>
   </div>
 </div>
 
 <div class="mt-3 row">
   <div class="mx-auto col">
     <h3>作業一覧</h3>
-    <% if @works_all.blank?%>
-      <p>作業が登録されていません。</p>
-    <% else %>
-      <%= render "works/list", works: @works_all %>
-    <% end %>
+    <%= render "works/list", works: @works_all %>
   </div>
 </div>

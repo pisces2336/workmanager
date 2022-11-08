@@ -1,21 +1,25 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th>作業</th>
-      <th>提出日</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% works.each do |work| %>
+<% if works.blank? %>
+  <p>表示する作業はありません。</p>
+<% else %>
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= work.title %></td>
-        <td><%= work.date.strftime("%m/%d") %></td>
-        <td class="text-end">
-          <%= link_to "編集", edit_commition_work_path(work.commition, work), class: "btn btn-success"%>
-          <%= link_to "削除", commition_work_path(work.commition, work), method: :destroy, class: "btn btn-danger"%>
-        </td>
+        <th>作業</th>
+        <th>提出日</th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% works.each do |work| %>
+        <tr>
+          <td><%= work.title %></td>
+          <td><%= work.date.strftime("%m/%d") %></td>
+          <td class="text-end">
+            <%= link_to "編集", edit_commition_work_path(work.commition, work), class: "btn btn-success"%>
+            <%= link_to "削除", commition_work_path(work.commition, work), method: :delete, data: {confirm: "本当に削除しますか?"}, class: "btn btn-danger"%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
