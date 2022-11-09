@@ -7,68 +7,8 @@
         <%= link_to "削除", commition_path(@commition), method: :delete, data: {confirm: "本当に削除しますか?"}, class: "btn btn-danger"%>
       </div>
     </div>
-    <table class="table align-middle mt-1">
-      <tr>
-        <td>依頼者名</td>
-        <td><%= @commition.name %></td>
-      </tr>
-      <tr>
-        <td>Twitter</td>
-        <td><%= @commition.twitter %></td>
-      </tr>
-      <tr>
-        <td>早期納品</td>
-        <td>
-          <% if @commition.early_submit %>
-            あり
-          <% else %>
-            なし
-          <% end %>
-        </td>
-      </tr>
-      <tr>
-        <td>サンプル使用</td>
-        <td>
-          <% if @commition.use_sample %>
-            可能
-          <% else %>
-            不可
-          <% end %>
-        </td>
-      </tr>
-      <tr>
-        <td>お支払方法</td>
-        <td>
-          <% if @commition.payment_method.blank? %>
-            未設定
-          <% else %>
-            <%= @commition.payment_method %>
-          <% end %>
-        </td>
-      </tr>
-      <tr>
-        <td>お見積り金額</td>
-        <td>
-          <% if @commition.price.blank? %>
-            未設定
-          <% else %>
-            <%= @commition.price %>
-          <% end %>
-        </td>
-      </tr>
-      <tr>
-        <td>入金確認</td>
-        <td>
-          <% if @commition.paid %>
-            確認済み
-          <% else %>
-            未確認
-          <% end %>
-        </td>
-      </tr>
-      <tr>
-      </tr>
-    </table>
+    
+    <%= render "info", commition: @commition %>
   </div>
 </div>
 

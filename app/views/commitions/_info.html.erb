@@ -1,0 +1,64 @@
+<table class="table align-middle">
+  <tr>
+    <td class="w-50">依頼者名</td>
+    <td class="w-50"><%= commition.name %></td>
+  </tr>
+  <tr>
+    <td>Twitter</td>
+    <td>
+      <%= link_to "https://twitter.com/" + commition.twitter, class: "btn btn-link p-0" do %>
+        <%= commition.twitter %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>早期納品</td>
+    <td>
+      <% if commition.early_submit %>
+        あり
+      <% else %>
+        なし
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>サンプル使用</td>
+    <td>
+      <% if commition.use_sample %>
+        可能
+      <% else %>
+        不可
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>お支払方法</td>
+    <td>
+      <% if commition.payment_method.blank? %>
+        未設定
+      <% else %>
+        <%= commition.payment_method %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>お見積り金額</td>
+    <td>
+      <% if commition.price.blank? %>
+        未設定
+      <% else %>
+        <%= commition.price %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>入金確認</td>
+    <td>
+      <% if commition.paid %>
+        確認済み
+      <% else %>
+        未確認
+      <% end %>
+    </td>
+  </tr>
+</table>
