@@ -1,8 +1,8 @@
 <div class="row">
   <div class="mx-auto col-11">
-    <div>
+    <div class="d-flex justify-content-between">
       <h2>依頼詳細</h2>
-      <div class="text-end">
+      <div>
         <%= link_to "編集", edit_commition_path(@commition), class: "btn btn-success"%>
         <%= link_to "削除", commition_path(@commition), method: :delete, data: {confirm: "本当に削除しますか?"}, class: "btn btn-danger"%>
       </div>
