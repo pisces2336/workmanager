@@ -1,22 +1,41 @@
 <% if works.blank? %>
   <p>表示する作業はありません。</p>
 <% else %>
+  <%# 最初のworkの持ち主を見れば十分　%>
+  <% commition_show = current_page?(controller: :commitions, action: :show, id: works[0].commition_id) %>
+
   <table class="table align-middle">
     <thead>
       <tr>
-        <th>作業</th>
-        <th>提出日</th>
-        <th></th>
+        <% if commition_show %>
+          <th style="width: 30%">作業</th>
+          <th style="width: 20%">締切</th>
+          <th style="width: 50%"></th>
+        <% else %>
+          <th style="width: 30%">依頼者名</th>
+          <th style="width: 20%">作業</th>
+          <th style="width: 20%">締切</th>
+          <th style="width: 30%"></th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
       <% works.each do |work| %>
         <tr>
+          <% if !commition_show %>
+            <td><%= link_to work.commition.name, commition_path(work.commition), class: "btn btn-link p-0" %></td>
+          <% end %>
+
           <td><%= work.title %></td>
           <td><%= work.date.strftime("%m/%d") %></td>
+
           <td class="text-end">
-            <%= link_to "編集", edit_commition_work_path(work.commition, work), class: "btn btn-success"%>
-            <%= link_to "削除", commition_work_path(work.commition, work), method: :delete, data: {confirm: "本当に削除しますか?"}, class: "btn btn-danger"%>
+            <% if commition_show %>
+                <%= link_to "編集", edit_commition_work_path(work.commition, work), class: "btn btn-success"%>
+                <%= link_to "削除", commition_work_path(work.commition, work), method: :delete, data: {confirm: "本当に削除しますか?"}, class: "btn btn-danger"%>
+            <% else %>
+              <%= link_to "詳細", commition_path(work.commition), class: "btn btn-success" %>
+            <% end %>
           </td>
         </tr>
       <% end %>
