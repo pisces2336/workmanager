@@ -23,7 +23,7 @@
       <% works.each do |work| %>
         <tr>
           <% if !commition_show %>
-            <td><%= link_to work.commition.name, commition_path(work.commition), class: "btn btn-link p-0" %></td>
+            <td><%= link_to work.commition.name, commition_path(work.commition), class: "btn btn-link text-decoration-none p-0" %></td>
           <% end %>
 
           <td><%= work.title %></td>
