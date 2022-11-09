@@ -1,11 +1,16 @@
 class CommitionsController < ApplicationController
+  before_action :commition_auth, except: [:index, :new, :create]
+
   def index
-    @commitions = Commition.all
+    @commitions = Commition.where(user_id: current_user.id)
   end
 
   def show
     @commition = Commition.find(params[:id])
     @works = Work.where(commition: @commition).order("date")
+    if @commition.user_id != current_user.id
+      redirect_to user_path(current_user)
+    end
   end
 
   def new
@@ -24,6 +29,9 @@ class CommitionsController < ApplicationController
 
   def edit
     @commition = Commition.find(params[:id])
+    if @commition.user_id != current_user.id
+      redirect_to user_path(current_user)
+    end
   end
 
   def update
@@ -47,5 +55,12 @@ class CommitionsController < ApplicationController
       :id, :user_id, :name, :twitter, :early_submit,
       :use_sample, :payment_method, :price, :paid
     )
+  end
+
+  def commition_auth
+    commition = Commition.find(params[:id])
+    if commition.user_id != current_user.id
+      redirect_to user_path(current_user)
+    end
   end
 end

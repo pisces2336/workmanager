@@ -1,4 +1,6 @@
 class WorksController < ApplicationController
+  before_action :work_auth, except: [:new, :create]
+
   def new
     @commition = Commition.find(params[:commition_id])
     @work = Work.new
@@ -40,5 +42,12 @@ class WorksController < ApplicationController
   private
   def work_params
     params.require(:work).permit(:title, :date, :commition_id)
+  end
+
+  def work_auth
+    work = Work.find(params[:id])
+    if work.user_id != current_user.id
+      redirect_to user_path(current_user)
+    end
   end
 end
