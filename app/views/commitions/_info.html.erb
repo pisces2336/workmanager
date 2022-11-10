@@ -14,31 +14,31 @@
   <tr>
     <td>早期納品</td>
     <td>
-      <% commition.early_submit ? "あり" : "なし" %>
+      <%= commition.early_submit ? "あり" : "なし" %>
     </td>
   </tr>
   <tr>
     <td>サンプル使用</td>
     <td>
-      <% commition.use_sample ? "可能" : "不可" %>
+      <%= commition.use_sample ? "可能" : "不可" %>
     </td>
   </tr>
   <tr>
     <td>お支払方法</td>
     <td>
-      <% commition.payment_method.blank? ? "未設定" : commition.payment_method %>
+      <%= commition.payment_method.blank? ? "未設定" : commition.payment_method %>
     </td>
   </tr>
   <tr>
     <td>お見積り金額</td>
     <td>
-      <% commition.price.blank? ? "未設定" : commition.price %>
+      <%= commition.price.blank? ? "未設定" : commition.price %>
     </td>
   </tr>
   <tr>
     <td>入金確認</td>
     <td>
-      <% commition.paid.blank? ? "未確認" : commition.paid.strftime("%m/%d") %>
+      <%= commition.paid.blank? ? "未確認" : commition.paid.strftime("%m/%d") %>
     </td>
   </tr>
 </table>
