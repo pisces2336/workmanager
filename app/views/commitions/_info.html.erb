@@ -54,10 +54,10 @@
   <tr>
     <td>入金確認</td>
     <td>
-      <% if commition.paid %>
-        確認済み
-      <% else %>
+      <% if commition.paid.blank? %>
         未確認
+      <% else %>
+        <%= commition.paid.strftime("%m/%d") %>
       <% end %>
     </td>
   </tr>

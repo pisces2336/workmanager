@@ -44,14 +44,7 @@
       </tr>
       <tr>
         <td><%= f.label :use_sample, "入金確認" %></td>
-        <td>
-          <%= f.radio_button :paid, true %>
-          <%= f.label :paid_true, "確認済" %>
-        </td>
-        <td>
-          <%= f.radio_button :paid, false, checked: true %>
-          <%= f.label :paid_false, "未確認" %>
-        </td>
+        <td colspan="2"><%= f.date_field :paid %></td>
       </tr>
     </tbody>
   </table>
