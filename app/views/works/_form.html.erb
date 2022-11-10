@@ -5,8 +5,12 @@
     <% end %>
     <tbody>
       <tr>
-        <td class="w-50"><%= f.label :title, "作業名" %></td>
-        <td class="w-50"><%= f.text_field :title %></td>
+        <td class="w-50">依頼者名</td>
+        <td class="w-50"><%= commition.name %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :title, "作業名" %></td>
+        <td><%= f.text_field :title %></td>
       </tr>
       <tr>
         <td><%= f.label :date, "提出日" %></td>
