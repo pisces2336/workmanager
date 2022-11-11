@@ -1,24 +1,24 @@
-<table class="table align-middle">
-      <thead>
-        <tr>
-          <th style="width: 35%">名前</th>
-          <th style="width: 35%">Twitter</th>
-          <th style="width: 30%"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% commitions.each do |commition| %>
-          <tr>
-            <td>
-              <%= link_to commition.name, commition_path(commition), class: "btn btn-link text-decoration-none p-0" %>
-            </td>
-            <td>
-              <%= link_to "https://twitter.com/" + commition.twitter, class: "btn btn-link text-decoration-none p-0" do %>
-                <%= commition.twitter %>
-              <% end %>
-            </td>
-            <td class="text-end"><%= link_to "詳細", commition_path(commition), class: "btn btn-success" %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+<table class="table table-hover align-middle">
+  <thead>
+    <tr>
+      <th style="width: 35%">名前</th>
+      <th style="width: 35%">Twitter</th>
+      <th style="width: 30%"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% commitions.each do |commition| %>
+      <tr>
+        <td>
+          <%= link_to commition.name, commition_path(commition), class: "btn btn-link text-decoration-none p-0" %>
+        </td>
+        <td>
+          <%= link_to "https://twitter.com/" + commition.twitter, class: "btn btn-link text-decoration-none p-0" do %>
+            <%= commition.twitter %>
+          <% end %>
+        </td>
+        <td class="text-end"><%= link_to "詳細", commition_path(commition), class: "btn btn-success" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

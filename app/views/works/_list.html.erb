@@ -4,7 +4,7 @@
   <%# 最初のworkの持ち主を見れば十分　%>
   <% commition_show = current_page?(controller: :commitions, action: :show, id: works[0].commition_id) %>
 
-  <table class="table align-middle">
+  <table class="table table-hover align-middle">
     <thead>
       <tr>
         <% if commition_show %>
