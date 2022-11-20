@@ -53,7 +53,7 @@ class CommitionsController < ApplicationController
   def commition_params
     params.require(:commition).permit(
       :id, :user_id, :name, :twitter, :early_submit,
-      :use_sample, :payment_method, :price, :paid
+      :use_sample, :payment_method, :price, :paid, :document_link
     )
   end
 

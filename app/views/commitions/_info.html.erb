@@ -41,4 +41,14 @@
       <%= commition.paid.blank? ? "未確認" : commition.paid.strftime("%m/%d") %>
     </td>
   </tr>
+  <tr>
+    <td>詳細リンク</td>
+    <td>
+      <% if commition.document_link.blank? %>
+        未確認
+      <% else %>
+        <%= link_to "リンク", commition.document_link, class: "btn btn-link text-decoration-none p-0"%>
+      <% end %>
+    </td>
+  </tr>
 </table>
