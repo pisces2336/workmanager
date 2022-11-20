@@ -22,11 +22,17 @@
     <tbody>
       <% works.each do |work| %>
         <tr>
-          <% if !commition_show %>
+          <% if commition_show %>
+            <% if work.memo.present? %>
+              <td rowspan="2"><%= work.title %></td>
+            <% else %>
+              <td><%= work.title %></td>
+            <% end %>
+          <% else %>
             <td><%= link_to work.commition.name, commition_path(work.commition), class: "btn btn-link text-decoration-none p-0" %></td>
+            <td><%= work.title %></td>
           <% end %>
 
-          <td><%= work.title %></td>
           <td><%= work.date.strftime("%m/%d") %></td>
 
           <td class="text-end">
@@ -38,6 +44,12 @@
             <% end %>
           </td>
         </tr>
+
+        <% if commition_show && work.memo.present? %>
+          <tr>
+            <td colspan="2"><%= work.memo %></td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>

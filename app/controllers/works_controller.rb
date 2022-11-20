@@ -41,7 +41,7 @@ class WorksController < ApplicationController
 
   private
   def work_params
-    params.require(:work).permit(:title, :date, :commition_id)
+    params.require(:work).permit(:title, :date, :memo, :commition_id)
   end
 
   def work_auth
