@@ -2,7 +2,7 @@ class CommitionsController < ApplicationController
   before_action :commition_auth, except: [:index, :new, :create]
 
   def index
-    @commitions = Commition.where(user_id: current_user.id)
+    @commitions = Commition.where(user_id: current_user.id).order("id DESC")
   end
 
   def show
