@@ -35,9 +35,17 @@
             </td>
           <% else %>
             <% if work.memo.present? %>
-              <td rowspan="2"><%= work.commition.name %></td>
+              <td rowspan="2">
+                <%= link_to commition_path(work.commition), class: "btn btn-link text-decoration-none" do %>
+                  <%= work.commition.name %>
+                <% end %>
+              </td>
             <% else %>
-              <td><%= work.commition.name %></td>
+              <td>
+                <%= link_to commition_path(work.commition), class: "btn btn-link text-decoration-none" do %>
+                  <%= work.commition.name %>
+                <% end %>
+              </td>
             <% end %>
             <td><%= work.title %></td>
             <td><%= work.date.strftime("%m/%d") %></td>
