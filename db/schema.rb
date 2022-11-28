@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_20_123615) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_28_054937) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,8 +20,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_20_123615) do
     t.string "twitter"
     t.boolean "early_submit"
     t.boolean "use_sample"
-    t.string "payment_method"
-    t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "paid"

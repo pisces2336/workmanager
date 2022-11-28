@@ -1,0 +1,477 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.5 (Ubuntu 14.5-2.pgdg20.04+2)
+-- Dumped by pg_dump version 14.5 (Ubuntu 14.5-2.pgdg22.04+2)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: heroku_ext; Type: SCHEMA; Schema: -; Owner: uba93dsg1ejeva
+--
+
+CREATE SCHEMA heroku_ext;
+
+
+ALTER SCHEMA heroku_ext OWNER TO uba93dsg1ejeva;
+
+--
+-- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA heroku_ext;
+
+
+--
+-- Name: EXTENSION pg_stat_statements; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION pg_stat_statements IS 'track planning and execution statistics of all SQL statements executed';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+CREATE TABLE public.ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.ar_internal_metadata OWNER TO jrbfevpbdxgxwk;
+
+--
+-- Name: commitions; Type: TABLE; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+CREATE TABLE public.commitions (
+    id bigint NOT NULL,
+    user_id integer,
+    name character varying,
+    twitter character varying,
+    early_submit boolean,
+    use_sample boolean,
+    payment_method character varying,
+    price integer,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    paid date,
+    document_link character varying
+);
+
+
+ALTER TABLE public.commitions OWNER TO jrbfevpbdxgxwk;
+
+--
+-- Name: commitions_id_seq; Type: SEQUENCE; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+CREATE SEQUENCE public.commitions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.commitions_id_seq OWNER TO jrbfevpbdxgxwk;
+
+--
+-- Name: commitions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+ALTER SEQUENCE public.commitions_id_seq OWNED BY public.commitions.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+CREATE TABLE public.schema_migrations (
+    version character varying NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO jrbfevpbdxgxwk;
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+CREATE TABLE public.users (
+    id bigint NOT NULL,
+    email character varying DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying,
+    reset_password_sent_at timestamp(6) without time zone,
+    remember_created_at timestamp(6) without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.users OWNER TO jrbfevpbdxgxwk;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+CREATE SEQUENCE public.users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO jrbfevpbdxgxwk;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: works; Type: TABLE; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+CREATE TABLE public.works (
+    id bigint NOT NULL,
+    user_id integer,
+    commition_id integer,
+    title character varying,
+    date date,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    memo text
+);
+
+
+ALTER TABLE public.works OWNER TO jrbfevpbdxgxwk;
+
+--
+-- Name: works_id_seq; Type: SEQUENCE; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+CREATE SEQUENCE public.works_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.works_id_seq OWNER TO jrbfevpbdxgxwk;
+
+--
+-- Name: works_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+ALTER SEQUENCE public.works_id_seq OWNED BY public.works.id;
+
+
+--
+-- Name: commitions id; Type: DEFAULT; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+ALTER TABLE ONLY public.commitions ALTER COLUMN id SET DEFAULT nextval('public.commitions_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Name: works id; Type: DEFAULT; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+ALTER TABLE ONLY public.works ALTER COLUMN id SET DEFAULT nextval('public.works_id_seq'::regclass);
+
+
+--
+-- Data for Name: ar_internal_metadata; Type: TABLE DATA; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+COPY public.ar_internal_metadata (key, value, created_at, updated_at) FROM stdin;
+environment	production	2022-11-23 09:27:07.970609	2022-11-23 09:27:07.970609
+\.
+
+
+--
+-- Data for Name: commitions; Type: TABLE DATA; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+COPY public.commitions (id, user_id, name, twitter, early_submit, use_sample, payment_method, price, created_at, updated_at, paid, document_link) FROM stdin;
+2	1	♡	@0MANYAN0	f	t	PayPay	7500	2022-11-23 09:56:50.162507	2022-11-23 09:56:50.162507	2022-11-12	https://docs.google.com/document/d/1D7kqe7-IMm5tvhjKFQih4ueVox7ecfJJ74oW2P_yYdI/edit?usp=sharing
+9	1	♡	@I___iii000	f	t	PayPay	4000	2022-11-23 10:17:02.566865	2022-11-23 11:39:18.475509	2022-11-23	https://docs.google.com/document/d/1fM94sjQRpkCeFF7P3ljXUA_38uDMkG3-utQYGzl7W5M/edit?usp=sharing
+8	1	さくの	@_0323trhk	f	t	PayPay	13500	2022-11-23 10:11:33.916249	2022-11-25 23:43:39.142496	2022-11-25	https://docs.google.com/document/d/1xXTuiOpcriGMkUPkuO2Kxa3zv4hz_JuNKYT3IaJERww/edit?usp=sharing
+23	1	𝒴	@U_uxuUv	f	t	PayPay	4500	2022-11-23 13:39:04.067047	2022-11-23 13:44:20.685591	\N	https://docs.google.com/document/d/1sts-JjEhTL3OYAIH7j4Crnynk1M7zsY7Z7jv91Q7-lI/edit?usp=sharing
+13	1	めるな	@Q_nQ_n	f	t	PayPay	5000	2022-11-23 11:38:49.693645	2022-11-23 12:02:17.283558	2022-11-23	https://docs.google.com/document/d/1PhMSLvT1G-qCN-yt_M1HmACydRp8NiSCJRT6W8nD1lk/edit?usp=sharing
+15	1	すぴ	@ux_ouz	t	t	PayPay	5500	2022-11-23 12:12:03.06829	2022-11-23 23:33:17.185901	2022-11-24	https://docs.google.com/document/d/12kVwVUKtdSZ8PthAMfFqxUCW8m6xRVUMJ6lEEjbYl5Q/edit?usp=sharing
+25	1	˚ ʚ ᖭི༏ᖫྀ ɞ˚	@iv_yume_	f	t	銀行振込	4500	2022-11-23 13:51:53.932353	2022-11-25 23:44:57.712696	2022-11-25	https://docs.google.com/document/d/1SyizYq9RxPAzp3Rsr8zpNDw9A8aFjRUGfpZKiY7m55Q/edit?usp=sharing
+41	1	𝓎🤍	@NIN0_NyaN	f	t	楽天ギフトカード	9000	2022-11-23 15:54:43.712238	2022-11-26 14:18:41.254489	2022-11-26	https://docs.google.com/document/d/1cjfbtLIMJ2_X4l7DJ566h60h_Dvnb2wOeTF9I472c1k/edit?usp=sharing
+11	1	氷雨	@hail_168	f	t	PayPay	7000	2022-11-23 10:23:17.306864	2022-11-23 12:39:28.828052	2022-11-23	https://docs.google.com/document/d/1EIf7C92ffcEH54HDNyuCCllp9LZ2H72XMk3yjP5i9k8/edit?usp=sharing
+27	1	ぺち太郎	@Oo__peti	f	t	銀行振込	4500	2022-11-23 14:04:04.373645	2022-11-24 08:50:06.18717	2022-11-24	https://docs.google.com/document/d/1P2Nd1YSQJLbuzzZjn8rcroUrbHP31YbJkq50g9WIUNg/edit?usp=sharing
+26	1	乃²	@Nyann_03__	f	t	PayPay	4000	2022-11-23 13:57:02.679944	2022-11-23 13:58:52.115379	\N	https://docs.google.com/document/d/1MBpagYkgS2Krr_UjgN2Y4u1q6xyj0vdEX02OPqqB05E/edit?usp=sharing
+18	1	りりちゃん	none	f	t	skeb	10000	2022-11-23 13:01:00.900751	2022-11-23 13:01:00.900751	2022-11-09	https://skeb.jp/requests/1080115
+17	1	🩰❥	@9__68XO	t	t	PayPay	9000	2022-11-23 12:40:41.641447	2022-11-23 13:14:04.997855	2022-11-23	https://docs.google.com/document/d/1xgv6XYWwyG-P2Mh4TSo4BxgWiHGR6xKYuUB2EKiEFs8/edit?usp=sharing
+33	1	みゅ〜	@mimi_3317	f	t	銀行振込	4500	2022-11-23 14:46:57.633472	2022-11-25 23:45:18.901473	2022-11-25	https://docs.google.com/document/d/1evun5xVPtmWF0oh6rG4ImtRxiksAAppcDi1gnZQn75A/edit?usp=sharing
+14	1	˙˚ʚ✞ɞ˚	@totoirabuai	f	t	銀行振込	4000	2022-11-23 12:03:23.983641	2022-11-24 02:29:31.662951	2022-11-24	https://docs.google.com/document/d/1D4P2JPqsu8g9zgz7ImcW7pk3XORbIgq5i5Q0eE4vK80/edit?usp=sharing
+29	1	り♡	@nyanchyandayo	f	t	楽天ギフトカード	4500	2022-11-23 14:14:52.63411	2022-11-26 08:12:15.528964	2022-11-26	https://docs.google.com/document/d/12L-7nSM86boUY-hgsqVK8pOXiHipueIksGYSk_4Axj0/edit?usp=sharing
+20	1	yume(よな)	none	f	t	skeb	8000	2022-11-23 13:04:11.771755	2022-11-27 13:23:44.147352	2022-11-06	https://skeb.jp/requests/1078451
+1	1	るな	@0827po__	f	t	iTunes	4000	2022-11-23 09:55:44.490284	2022-11-24 23:11:26.173129	2022-10-12	https://docs.google.com/document/d/1Y9NNqHuPUeSXxB7hG8lfAPf3qBov4QwlZ0FNWbzCFgw/edit?usp=sharing
+39	1	りぃ	@oineko__	t	t	PayPay	5000	2022-11-23 15:40:11.684534	2022-11-24 02:02:16.211688	\N	https://docs.google.com/document/d/1uWkmJ7vBgE1gLRWTF7BAAontWWVdH9kYzRvU48FLa_g/edit?usp=sharing
+32	1	🖤	@llxsny	t	f	銀行振込	17500	2022-11-23 14:38:05.027976	2022-11-25 23:43:04.909591	2022-11-25	https://docs.google.com/document/d/1QYj0uiJqTADxddPJnU1Pw6nT9SrUTFj4Z2HRq2hAKVc/edit?usp=sharing
+19	1	こめじイリヤ(よな)	none	f	t	skeb	8000	2022-11-23 13:02:34.126767	2022-11-27 06:59:07.434614	2022-10-25	https://skeb.jp/requests/1059817
+28	1	❄️	@r_ain_fall	f	t	銀行振込	4500	2022-11-23 14:08:06.113015	2022-11-24 06:48:27.406552	2022-11-24	https://docs.google.com/document/d/1ZA-eZT768p1omt2qTcTvfLznXIxNvS_Xr0fVRm_Fn2Q/edit?usp=sharing
+38	1	まな	@175luv	f	t	PayPay	8500	2022-11-23 15:25:44.656721	2022-11-23 15:32:56.310892	\N	https://docs.google.com/document/d/1IVkgcic2pqQAdflzKmdLmUUb-wsZSx3Aldk2pivZsr4/edit?usp=sharing
+12	1	べいろす	@veiros	f	t	銀行振込	4500	2022-11-23 10:24:35.029946	2022-11-24 09:55:54.480208	2022-12-21	https://docs.google.com/document/d/1KPscebtTbtrsRp1y6o-TY8c1MNwrMaPpHCYALbr1iXI/edit?usp=sharing
+40	1	白衣ちゆ (1)	@hakui_chiyu	f	t		4500	2022-11-23 15:46:50.142073	2022-11-24 02:02:51.802276	\N	https://docs.google.com/document/d/1GHkQ3QUVpyCL2h_uNaslje2awWzTaAB4zclbgxejB6Y/edit?usp=sharing
+10	1	たくm	@9ygsx	t	t	PayPay	11000	2022-11-23 10:19:33.220932	2022-11-24 02:07:24.165573	2022-11-23	https://docs.google.com/document/d/1R96u7OaZWya7MXCyRk6GcZyVJBV-qj1i78VgXyMmcUw/edit?usp=sharing
+31	1	るに	@Ru_ni_12	f	t	PayPay	5000	2022-11-23 14:32:32.219071	2022-11-27 09:24:35.114871	2022-11-27	https://docs.google.com/document/d/1e7ECS_T3Ns_XCYGkPQSvJ29wZukEFQsz09mQ1vnCx2o/edit?usp=sharing
+6	1	うさぎ❤︎	@0YASUMIUSAGI	f	t	銀行振込	14500	2022-11-23 10:05:48.571007	2022-11-25 00:09:42.366203	2022-11-25	https://docs.google.com/document/d/1ZqEgXilzabrEgPksf8lmnpyL2ZuzO_DuJuX2XQglyx4/edit?usp=sharing
+24	1	ℋ.	@Dream___I82cm	f	t	銀行振込	4500	2022-11-23 13:45:53.054115	2022-11-24 11:04:53.808499	2022-11-24	https://docs.google.com/document/d/1Cmpytztj1pvppvW4ktRd50MjU7heIIJ4rWSy4uMlFCQ/edit?usp=sharing
+22	1	の	@7Na_25	f	t	PayPay	4000	2022-11-23 13:10:21.907495	2022-11-25 05:26:23.587168	2022-11-25	https://docs.google.com/document/d/1sFBKAwlXbAJRlnRdzYQ3LX9B_oxogWLC1go8iMKQAG0/edit?usp=sharing
+5	1	ℳ	@Emu_0729	t	t	PayPay	5500	2022-11-23 10:02:29.799735	2022-11-24 01:57:06.870297	\N	https://docs.google.com/document/d/1mBiFcy-yA82cRBcKSQBi10nRg0VHtZuO_9PXdsd24Nw/edit?usp=sharing
+35	1	りこ	@165cm65kg_	f	t	PayPay	4000	2022-11-23 15:05:46.867947	2022-11-24 02:00:36.011295	\N	https://docs.google.com/document/d/1XzAtFZvMWVNGrOzOA5kwUOXcWIxSOhx0M1skhM931Q8/edit?usp=sharing
+37	1	たぐ	@mm_torihiki22	f	t	PayPay	4500	2022-11-23 15:17:52.926561	2022-11-24 03:09:00.063418	2022-11-24	https://docs.google.com/document/d/1aHJZIUdu_P4IyYfQvGZUYb5zy9Q_X0ZBwZEzapo0kpY/edit?usp=sharing
+30	1	めぐ	@P67NYAN	f	t	PayPay	4500	2022-11-23 14:24:10.957074	2022-11-26 00:10:53.179558	2022-11-23	https://docs.google.com/document/d/1jpt4KGDVlOOnwAxHDUvLr-txzYj7lCL26ninRaawHqI/edit?usp=sharing
+16	1	ぅゅ	@rub82_	f	t	銀行振込	4500	2022-11-23 12:27:56.420871	2022-11-25 00:07:53.943418	2022-12-14	https://docs.google.com/document/d/1_AFGAcvfv89mVR9BW3XuH-CqKF_yN8IiXSECMvEMyPE/edit?usp=sharing
+21	1	はすお(よな)	none	f	t	skeb	4000	2022-11-23 13:05:45.321953	2022-11-27 13:24:23.479037	2022-11-19	https://skeb.jp/requests/1100209
+34	1	とっとこみあたろう	@_9_9b_	f	f	PayPay	5000	2022-11-23 14:48:10.321288	2022-11-23 16:43:48.569079	2022-11-24	https://docs.google.com/document/d/1OGiMwlXhboBDQXpykjkM8RzT9YbwWSUkhHXiYL7g6AA/edit?usp=sharing
+62	1	取引垢	@pok__lIIl	f	t		\N	2022-11-27 12:35:21.936761	2022-11-27 12:35:21.936761	\N	https://docs.google.com/document/d/1uXNklSFJNplPogR8B2xYwRseHpztyG0Jvdgqm0qQjWA/edit?usp=sharing
+49	1	Tag	@tag_lla	f	t	PayPay	5100	2022-11-23 16:52:24.12218	2022-11-23 16:52:24.12218	2022-10-11	https://docs.google.com/document/d/1g2CqyAZ30e6em-RqYQDFvlwdOuN9m2lQjnpezYBGgrc/edit?usp=sharing
+51	1	𝐴𝑤𝑎𝑠𝑒 𝑅𝑒𝑖𝑎 (2)	@AwaseReia	f	t	銀行振込	6000	2022-11-23 16:55:24.76059	2022-11-23 16:55:24.76059	\N	https://docs.google.com/document/d/1c4Pri2jI7ahn7IHLweRd8copA0mLULXpHKIsSVyqLxQ/edit?usp=sharing
+48	1	ばあう	@na_o_na_ba	f	f	銀行振込	5000	2022-11-23 16:50:14.508338	2022-11-24 01:45:58.067049	2022-10-10	https://docs.google.com/document/d/1lMyy7XhKNdDvsmL9BMCwjS4CQanrEhPyN1Y1q5e0JnE/edit?usp=sharing
+52	1	しおり	@Hayama_0610	f	f	PayPay	5200	2022-11-24 01:53:11.019903	2022-11-24 01:53:11.019903	2022-10-11	https://docs.google.com/document/d/1udBctKiRicS5TW3yjMFoLVsDReOhZEnkArmMmyjXFSA/edit?usp=sharing
+53	1	白衣ちゆ (2)	@hakui_chiyu	f	t		4500	2022-11-24 02:06:27.552849	2022-11-24 02:06:38.634836	\N	https://docs.google.com/document/d/1Z2YwWCMmI11AWyBxli75REZB8CoA16TTJldJt0yEok0/edit?usp=sharing
+55	1	𝕤𝕙𝕚𝕣𝕠🎧𓈒 𓂂𓏸	@babumi_UowoU	f	t	PayPay	4000	2022-11-24 06:59:18.050079	2022-11-24 07:05:29.752497	\N	https://docs.google.com/document/d/1Q5bPY8c74Va7lO0HBPXknoKM8rsZFZvbll8mE7Qdo8U/edit?usp=sharing
+56	1	ひなり	@hinari__zzz	f	t	PayPay	4000	2022-11-24 13:17:46.955495	2022-11-24 13:19:58.059809	\N	https://docs.google.com/document/d/1MRe2ZaRkkhy8Hzd7cMuXij777m973CaVEQ-DozZwDMY/edit?usp=sharing
+61	1	来世はかわいくなりたい。	@satonana3_	f	t	PayPay	4500	2022-11-27 12:24:35.250163	2022-11-27 12:46:27.500627	\N	https://docs.google.com/document/d/1jSamuaaTHkgOU9ddG7bx33ys7J0PFytI7KrbrhOBlpg/edit?usp=sharing
+63	1	𝑢𝑛𝑜	@02290w0_	f	t	PayPay	\N	2022-11-27 13:08:40.768814	2022-11-27 13:08:40.768814	\N	https://docs.google.com/document/d/1W2DH-8qfX92KoQrU7MrcA-2eqmtbOzu-hMr0FvWr96E/edit?usp=sharing
+57	1	アガー	@niito_31	t	t	PayPay	5500	2022-11-24 14:39:36.913276	2022-11-24 15:07:30.397207	\N	https://docs.google.com/document/d/1vvEDQtqY9V6khwTxsgPQofDsKE0scE1hzbAe_d3XIMA/edit?usp=sharing
+54	1	萌乃うさまる	@moeno_usamaru	f	t	PayPay	9000	2022-11-24 03:11:28.07966	2022-11-27 14:53:44.813826	2022-11-27	https://docs.google.com/document/d/1krcqlhWRll63jWjcTzZV87gXEwHhueuL393LvetXd-k/edit?usp=sharing
+50	1	𝐴𝑤𝑎𝑠𝑒 𝑅𝑒𝑖𝑎 (1)	@AwaseReia	f	t	銀行振込	9000	2022-11-23 16:54:48.228013	2022-11-25 07:09:16.261107	2022-11-25	https://docs.google.com/document/d/1ctKtrmQCkvbgWluDQ2Z-FDOOG72gXQXkzMxBSN96PcY/edit?usp=sharing
+60	1	🖤𝑆⛓	@1O18O313	f	t	PayPay	8500	2022-11-25 16:25:30.64289	2022-11-25 16:40:31.785928	\N	https://docs.google.com/document/d/17g9Y4fY_jN8VYsPhWEbV__XlyX-WwX0am30dZ7bg48Q/edit?usp=sharing
+58	1	あのね	@_y__zzz	f	t	PayPay	12900	2022-11-24 23:36:33.504825	2022-11-25 23:42:29.674698	2022-11-25	https://docs.google.com/document/d/1TNNy5Lv_8Tm4pEUHBesLdWGYiudxYLutjA2yDpBFieQ/edit?usp=sharing
+59	1	らる	@raru_milk_	f	t	銀行振込	5500	2022-11-25 02:24:36.98235	2022-11-25 23:47:13.880562	\N	https://docs.google.com/document/d/12z-GWnlbTRG2fAy_t-c_O9RIqdCuw5MTNvJeIXZMXHQ/edit?usp=sharing
+\.
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+COPY public.schema_migrations (version) FROM stdin;
+20221106102701
+20221106102710
+20221106103139
+20221110032835
+20221110033212
+20221120004454
+20221120123615
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+COPY public.users (id, email, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, created_at, updated_at) FROM stdin;
+1	yonakokoko@gmail.com	$2a$12$BY/kFeYzfl5oDeUFZ5K3gOqT94uA2j3sGj8ZkOpYgjJl3WlSioaV6	\N	\N	2022-11-25 05:59:06.563127	2022-11-23 09:54:23.383816	2022-11-25 05:59:06.563753
+\.
+
+
+--
+-- Data for Name: works; Type: TABLE DATA; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+COPY public.works (id, user_id, commition_id, title, date, created_at, updated_at, memo) FROM stdin;
+6	1	13	ラフ	2022-12-10	2022-11-23 12:02:09.739565	2022-11-23 12:02:09.739565	
+8	1	18	skeb納品	2022-12-04	2022-11-23 13:01:20.713645	2022-11-23 13:13:54.646615	skeb(しろこ)
+49	1	20	skebラフ	2023-01-01	2022-11-25 01:09:23.683769	2022-11-27 13:24:48.709703	納品期限1/3
+50	1	20	skeb線画	2023-01-02	2022-11-25 01:09:32.464533	2022-11-27 13:24:55.266421	納品期限1/3
+21	1	48	納品	2022-11-28	2022-11-23 16:50:25.21488	2022-11-23 16:50:25.21488	
+22	1	49	納品	2022-11-28	2022-11-23 16:52:39.720716	2022-11-23 16:52:39.720716	
+24	1	15	ラフ	2022-11-28	2022-11-23 23:33:27.014934	2022-11-23 23:33:27.014934	
+33	1	14	ラフ	2022-12-13	2022-11-24 02:30:15.030513	2022-11-24 02:30:15.030513	
+36	1	5	ラフ	2022-11-29	2022-11-24 06:55:05.876942	2022-11-24 06:55:05.876942	
+37	1	5	線画	2022-12-02	2022-11-24 06:55:16.187053	2022-11-24 06:55:16.187053	
+40	1	12	ラフ	2022-12-21	2022-11-24 09:55:46.863521	2022-11-27 06:47:21.633046	
+28	1	30	ラフ	2022-12-09	2022-11-24 01:59:11.928958	2022-11-27 06:49:40.275787	
+7	1	11	ラフ	2022-12-09	2022-11-23 12:38:50.633616	2022-11-27 06:50:19.638551	
+39	1	27	ラフ	2022-12-15	2022-11-24 08:50:15.174039	2022-11-27 06:51:11.75276	
+56	1	32	ラフ	2022-11-29	2022-11-25 07:29:35.6254	2022-11-25 07:29:35.6254	
+10	1	20	skeb納品	2023-01-03	2022-11-23 13:05:10.930368	2022-11-27 13:24:58.844105	納品期限1/3
+73	1	63	ラフ	2023-01-11	2022-11-27 13:28:34.89943	2022-11-27 13:28:34.89943	
+74	1	54	ラフ	2023-01-12	2022-11-27 14:56:00.720298	2022-11-27 14:56:00.720298	
+58	1	32	納品	2022-12-05	2022-11-25 07:29:48.380776	2022-11-25 07:29:48.380776	
+43	1	16	ラフ	2022-12-13	2022-11-25 00:07:45.225704	2022-11-27 06:51:51.106645	
+31	1	17	線画	2022-11-30	2022-11-24 02:18:31.093398	2022-11-25 07:37:57.633269	
+25	1	15	納品	2022-12-04	2022-11-23 23:33:50.259186	2022-11-25 07:40:07.347656	
+35	1	28	ラフ	2022-12-14	2022-11-24 06:50:06.800014	2022-11-27 06:52:07.636849	
+59	1	18	skeb線画	2022-12-02	2022-11-25 07:42:48.01476	2022-11-25 09:00:55.157908	
+38	1	5	納品	2022-12-04	2022-11-24 06:55:25.745014	2022-11-25 09:01:24.585306	
+51	1	22	ラフ	2023-01-04	2022-11-25 05:26:31.816481	2022-11-25 06:49:23.125353	
+52	1	33	ラフ	2023-01-05	2022-11-25 06:46:40.651582	2022-11-25 06:49:32.322159	
+5	1	9	ラフ	2022-12-09	2022-11-23 11:58:59.642726	2022-11-27 06:53:15.670714	
+14	1	34	ラフ	2022-12-10	2022-11-23 16:19:23.609631	2022-11-27 06:53:37.472764	
+44	1	6	ラフ	2022-12-15	2022-11-25 00:09:52.140822	2022-11-27 06:54:14.663179	
+53	1	50	ラフ	2023-01-06	2022-11-25 07:09:07.680259	2022-11-25 07:09:07.680259	
+54	1	51	ラフ	2023-01-09	2022-11-25 07:09:53.950362	2022-11-25 07:09:53.950362	
+55	1	25	ラフ	2023-01-07	2022-11-25 07:16:33.582975	2022-11-25 07:16:33.582975	
+41	1	24	ラフ	2022-12-21	2022-11-24 11:04:48.348517	2022-11-27 06:55:06.65651	
+45	1	19	skebラフ	2022-12-08	2022-11-25 01:04:22.167394	2022-11-27 06:58:53.204545	納品期限12/23
+46	1	19	skeb線画	2022-12-20	2022-11-25 01:04:35.798174	2022-11-27 06:59:14.43542	納品期限12/23
+57	1	32	線画	2022-12-03	2022-11-25 07:29:43.090273	2022-11-25 09:02:28.888535	
+60	1	18	skebラフ	2022-12-01	2022-11-25 09:02:59.949352	2022-11-25 09:02:59.949352	
+26	1	15	線画	2022-12-01	2022-11-23 23:34:10.513458	2022-11-25 09:03:17.06331	
+30	1	10	線画	2022-12-01	2022-11-24 02:17:24.712292	2022-11-25 09:03:48.051483	
+27	1	52	納品	2022-11-30	2022-11-24 01:53:28.603961	2022-11-25 09:04:09.34459	
+61	1	2	納品	2022-11-30	2022-11-25 09:04:41.721988	2022-11-25 09:04:41.721988	
+62	1	1	納品	2022-11-29	2022-11-25 09:05:05.889263	2022-11-25 09:05:05.889263	
+63	1	8	ラフ	2023-01-08	2022-11-25 10:21:00.516868	2022-11-25 10:21:00.516868	
+64	1	56	ラフ	2023-01-10	2022-11-25 10:22:10.748599	2022-11-25 10:22:10.748599	
+65	1	39	ラフ	2022-12-03	2022-11-25 11:18:18.460146	2022-11-25 11:18:18.460146	
+66	1	39	線画	2022-12-04	2022-11-25 11:18:26.096986	2022-11-25 11:18:26.096986	
+67	1	39	納品	2022-12-05	2022-11-25 11:18:32.822905	2022-11-25 11:18:32.822905	
+68	1	58	ラフ	2023-01-07	2022-11-25 11:20:57.550463	2022-11-25 11:20:57.550463	
+69	1	29	ラフ	2023-01-08	2022-11-26 08:12:09.541032	2022-11-26 08:12:09.541032	
+70	1	41	ラフ	2023-01-09	2022-11-26 14:19:20.73004	2022-11-26 14:19:20.73004	
+29	1	10	納品	2022-12-02	2022-11-24 02:16:55.004311	2022-11-27 03:33:10.622324	
+32	1	17	納品	2022-12-03	2022-11-24 02:18:42.348428	2022-11-27 03:33:38.084433	
+71	1	55	ラフ	2023-01-10	2022-11-27 06:28:43.232392	2022-11-27 06:28:43.232392	
+34	1	37	ラフ	2022-12-14	2022-11-24 03:08:43.659709	2022-11-27 06:44:41.809596	
+9	1	19	skeb納品	2022-12-22	2022-11-23 13:02:59.642382	2022-11-27 06:59:18.995753	納品期限12/23
+72	1	31	ラフ	2023-01-11	2022-11-27 09:25:56.325151	2022-11-27 09:25:56.325151	
+47	1	21	skebラフ	2023-01-15	2022-11-25 01:08:09.723553	2022-11-27 13:24:02.592265	納品期限1/17
+48	1	21	skeb線画	2023-01-16	2022-11-25 01:08:22.948006	2022-11-27 13:24:06.682582	納品期限1/17
+11	1	21	skeb納品	2023-01-17	2022-11-23 13:06:07.662529	2022-11-27 13:24:10.289056	納品期限1/17
+\.
+
+
+--
+-- Name: commitions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+SELECT pg_catalog.setval('public.commitions_id_seq', 63, true);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 1, true);
+
+
+--
+-- Name: works_id_seq; Type: SEQUENCE SET; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+SELECT pg_catalog.setval('public.works_id_seq', 74, true);
+
+
+--
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+ALTER TABLE ONLY public.ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: commitions commitions_pkey; Type: CONSTRAINT; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+ALTER TABLE ONLY public.commitions
+    ADD CONSTRAINT commitions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+ALTER TABLE ONLY public.schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: works works_pkey; Type: CONSTRAINT; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+ALTER TABLE ONLY public.works
+    ADD CONSTRAINT works_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
+
+
+--
+-- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: jrbfevpbdxgxwk
+--
+
+CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING btree (reset_password_token);
+
+
+--
+-- Name: SCHEMA heroku_ext; Type: ACL; Schema: -; Owner: uba93dsg1ejeva
+--
+
+GRANT USAGE ON SCHEMA heroku_ext TO jrbfevpbdxgxwk;
+
+
+--
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: jrbfevpbdxgxwk
+--
+
+REVOKE ALL ON SCHEMA public FROM postgres;
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+GRANT ALL ON SCHEMA public TO jrbfevpbdxgxwk;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- Name: LANGUAGE plpgsql; Type: ACL; Schema: -; Owner: postgres
+--
+
+GRANT ALL ON LANGUAGE plpgsql TO jrbfevpbdxgxwk;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
